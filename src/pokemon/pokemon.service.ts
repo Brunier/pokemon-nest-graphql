@@ -10,12 +10,16 @@ export class PokemonService {
     return this.httpService
       .get(`${API_ENDPOINTS.POKEMON}${id}`)
       .toPromise()
-      .then(({ data: { id, name, order, weight } }) => {
+      .then(({ data: { id, name, order, weight, abilities } }) => {
+        
         return {
           id,
           name,
           order,
           weight,
+          abilities: abilities.map(({ ability: { name } }) => ({
+            name,
+          })),
         } as Pokemon;
       });
   }
