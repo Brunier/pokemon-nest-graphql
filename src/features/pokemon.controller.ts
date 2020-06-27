@@ -9,10 +9,6 @@ export class PokemonController {
 
   @Get()
   getPokemon(): Observable<AxiosResponse<any>> {
-    this.httpService
-      .get('https://pokeapi.co/api/v2/pokemon/ditto')
-      .pipe(map(response => response.data));
-
     return this.httpService
       .get('https://pokeapi.co/api/v2/pokemon/ditto')
       .pipe(map(response => response.data));

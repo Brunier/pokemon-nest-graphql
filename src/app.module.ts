@@ -1,10 +1,16 @@
 import { Module, HttpModule } from '@nestjs/common';
-import { PokemonController } from './features/pokemon.controller';
-import { AppService } from './app.service';
+import { GraphQLModule } from '@nestjs/graphql';
+import { PokemonModule } from 'src/pokemon/pokemon.module';
+import { join } from 'path';
 
 @Module({
-  imports: [HttpModule],
-  controllers: [PokemonController],
-  providers: [AppService],
+  imports: [
+    HttpModule,
+    PokemonModule,
+    GraphQLModule.forRoot({
+      installSubscriptionHandlers: true,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
+  ],
 })
 export class AppModule {}
